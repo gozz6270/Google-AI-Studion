@@ -14,16 +14,16 @@ const responseSchema = {
     properties: {
         story: {
             type: Type.STRING,
-            description: "이야기의 다음 부분 서사."
+            description: 'The next portion of the story narrative.',
         },
         choices: {
             type: Type.ARRAY,
             items: { type: Type.STRING },
-            description: "플레이어를 위한 3가지 선택지 배열."
+            description: 'An array of three choices for the player.',
         },
         imagePrompt: {
             type: Type.STRING,
-            description: "AI 이미지 생성기를 위한 짧고 설명적인 프롬프트."
+            description: 'A short, descriptive prompt for an AI image generator.',
         }
     },
     required: ["story", "choices", "imagePrompt"],
@@ -31,13 +31,13 @@ const responseSchema = {
 
 export async function generateNextStep(storyHistory: string[], choice: string): Promise<GeminiResponse> {
     const fullPrompt = `
-        이전 이야기:
+        Previous story:
         ---
         ${storyHistory.join('\n---\n')}
         ---
-        플레이어의 선택: "${choice}"
+        Player's choice: "${choice}"
 
-        이야기의 다음 부분을 생성해 줘.
+        Continue the next part of the story.
     `;
 
     try {
@@ -58,13 +58,13 @@ export async function generateNextStep(storyHistory: string[], choice: string): 
         
         // Basic validation
         if (!parsedResponse.story || !Array.isArray(parsedResponse.choices) || !parsedResponse.imagePrompt) {
-            throw new Error("Gemini API로부터 잘못된 응답 구조를 받았습니다.");
+            throw new Error('Received an invalid response structure from the Gemini API.');
         }
         
         return parsedResponse as GeminiResponse;
 
     } catch (error) {
-        console.error("Gemini API 호출 오류:", error);
-        throw new Error("다음 이야기 단계를 생성하지 못했습니다. 고대의 마법이 약해지고 있습니다.");
+        console.error('Gemini API request error:', error);
+        throw new Error('Failed to conjure the next step of the tale. The ancient magic falters.');
     }
 }

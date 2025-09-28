@@ -8,7 +8,7 @@ const LoadingSpinner: React.FC = () => {
         className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-yellow-300"
         role="status"
       >
-        <span className="sr-only">로딩 중...</span>
+        <span className="sr-only">Loading...</span>
       </div>
     </div>
   );

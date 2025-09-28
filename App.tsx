@@ -33,7 +33,7 @@ const App: React.FC = () => {
         characterClass: character,
       });
     } catch (err) {
-      setError('모험을 시작하지 못했습니다. 왕국이 위험에 빠졌습니다! 다시 시도해 주세요.');
+      setError('Failed to start the adventure. The realm is in peril—please try again.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -41,7 +41,7 @@ const App: React.FC = () => {
   }, []);
 
   const handleChoice = useCallback(async (choice: string) => {
-    if (choice.toLowerCase().includes('play again') || choice.includes('다시 플레이')) {
+    if (choice.toLowerCase().includes('play again')) {
       setGameState(initialGameState);
       return;
     }
@@ -59,9 +59,8 @@ const App: React.FC = () => {
         choices: response.choices,
         imageUrl: `https://picsum.photos/seed/${encodeURIComponent(response.imagePrompt)}/1024/768`,
       }));
-    } catch (err)
- {
-      setError('신비로운 힘이 당신의 운명에 개입했습니다. 다른 선택을 해주세요.');
+    } catch (err) {
+      setError('Mystic forces have intervened in your fate. Please choose a different path.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -73,24 +72,24 @@ const App: React.FC = () => {
       case GameStatus.NotStarted:
         return (
           <div className="text-center flex flex-col items-center justify-center min-h-[60vh]">
-            <img src={`https://picsum.photos/seed/title/1024/768`} alt="중세 풍경" className="rounded-lg mb-8 shadow-lg w-full max-w-md" />
-            <h2 className="text-3xl font-cinzel text-amber-100 mb-4">아직 쓰이지 않은 연대기.</h2>
+            <img src={`https://picsum.photos/seed/title/1024/768`} alt="Medieval landscape" className="rounded-lg mb-8 shadow-lg w-full max-w-md" />
+            <h2 className="text-3xl font-cinzel text-amber-100 mb-4">A chronicle yet unwritten.</h2>
             <p className="max-w-prose text-amber-200 mb-8 leading-relaxed">
-              당신은 신화와 그림자의 땅, 새로운 이야기의 벼랑 끝에 서 있습니다. 모든 선택은 이 어두운 판타지 세계를 통과하는 길을 개척합니다. 영광, 재산, 또는 단순한 생존 중 무엇을 추구하시겠습니까?
+              You stand at the brink of a new tale in a land of myth and shadow. Every choice will carve a path through this dark fantasy realm. Will you seek glory, riches, or simple survival?
             </p>
             <button
               onClick={() => setGameState(prev => ({ ...prev, status: GameStatus.CharacterSelection }))}
               className="font-cinzel bg-yellow-400 text-slate-900 font-bold py-3 px-8 rounded-md hover:bg-yellow-300 transition-all duration-300 ease-in-out shadow-lg hover:shadow-yellow-300/50 text-xl tracking-wider"
             >
-              모험 시작하기
+              Begin your quest
             </button>
           </div>
         );
       case GameStatus.CharacterSelection:
         return (
             <div className="text-center flex flex-col items-center justify-center min-h-[60vh]">
-                <h2 className="text-4xl font-cinzel text-amber-100 mb-2">영웅을 선택하세요</h2>
-                <p className="max-w-prose text-amber-200 mb-8">당신의 정체성이 앞으로 걸어갈 길을 결정합니다.</p>
+                <h2 className="text-4xl font-cinzel text-amber-100 mb-2">Choose your hero</h2>
+                <p className="max-w-prose text-amber-200 mb-8">The identity you claim will shape the road ahead.</p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl">
                     {CHARACTER_CLASSES.map(character => (
                         <CharacterCard 
@@ -104,7 +103,7 @@ const App: React.FC = () => {
                 {isLoading && (
                     <div className="mt-8 flex flex-col items-center justify-center">
                         <LoadingSpinner />
-                        <p className="mt-4 text-amber-200 text-lg font-cinzel">운명을 빚어내는 중...</p>
+                        <p className="mt-4 text-amber-200 text-lg font-cinzel">Forging destiny...</p>
                     </div>
                 )}
             </div>
@@ -121,7 +120,7 @@ const App: React.FC = () => {
               {isLoading && (
                  <div className="absolute inset-0 bg-slate-900/70 flex flex-col items-center justify-center z-10 rounded-lg">
                     <LoadingSpinner />
-                    <p className="mt-4 text-amber-200 text-lg font-cinzel">운명의 실이 엮이는 중...</p>
+                    <p className="mt-4 text-amber-200 text-lg font-cinzel">Weaving the threads of fate...</p>
                 </div>
               )}
             </div>
@@ -149,9 +148,9 @@ const App: React.FC = () => {
       <div className="w-full max-w-5xl mx-auto">
         <header className="text-center mb-6">
           <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold text-yellow-300 tracking-wider" style={{ textShadow: '0 0 10px #fde047, 0 0 20px #fde047' }}>
-            중세 텍스트 RPG
+            Medieval Text RPG
           </h1>
-          <p className="text-amber-200 mt-2 text-lg">{gameState.characterClass?.name || '당신의 전설이 기다립니다'}</p>
+          <p className="text-amber-200 mt-2 text-lg">{gameState.characterClass?.name || 'Your legend awaits'}</p>
         </header>
 
         <main className="bg-slate-800/50 backdrop-blur-sm border border-yellow-300/20 rounded-lg shadow-2xl shadow-yellow-500/10 p-4 sm:p-8">
@@ -160,7 +159,7 @@ const App: React.FC = () => {
         </main>
 
         <footer className="text-center mt-8 text-slate-500 text-sm">
-          <p>Powered by Gemini. 디지털 대장간에서 만들어진 모험.</p>
+          <p>Powered by Gemini. An adventure forged in the digital foundry.</p>
         </footer>
       </div>
     </div>

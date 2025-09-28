@@ -35,7 +35,7 @@ const ImageWithLoader: React.FC<{ src: string, alt: string }> = ({ src, alt }) =
 const StoryDisplay: React.FC<StoryDisplayProps> = ({ imageUrl, storyText, isLoading }) => {
   return (
     <div className="relative">
-      <ImageWithLoader src={imageUrl} alt="모험의 한 장면" />
+      <ImageWithLoader src={imageUrl} alt="A scene from the adventure" />
       
       <div className="mt-6 bg-black/30 p-6 rounded-md border border-slate-600">
         <p className="text-amber-100 leading-relaxed whitespace-pre-wrap text-lg">

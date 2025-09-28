@@ -1,5 +1,5 @@
 {
-  "name": "중세 텍스트 RPG",
-  "description": "중세 판타지 세계를 배경으로 하는 AI 기반 텍스트 롤플레잉 게임입니다. Gemini가 생성하는 이야기는 당신의 선택에 따라 끊임없이 진화하며, 각 장면에는 AI가 생성한 독특한 이미지가 함께 제공됩니다.",
+  "name": "Medieval Text RPG",
+  "description": "An AI-driven text role-playing game set in a medieval fantasy world. Gemini continually adapts the story to your choices, and each scene is paired with a unique AI-generated image.",
   "requestFramePermissions": []
 }
